@@ -1,15 +1,18 @@
 {
   "name": "tryton-pyson",
-  "version": "4.0.0",
   "description": "Tryton Pyson",
+  "version": "4.0.0",
+  "license": "GPL-3.0+",
+  "author": "Coopengo <dev@coopengo.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coopengo/tryton-pyson.git"
+  },
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha tests/*"
   },
-  "author": "Coopengo <dev@coopengo.com>",
-  "license": "GPL-3.0+",
   "dependencies": {
-    "moment": "^2.13.0",
     "tryton-base": "~4.0.0",
     "underscore": "^1.8.3"
   },
