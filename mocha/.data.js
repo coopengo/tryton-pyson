@@ -229,40 +229,45 @@ exports.equalpyson = [{
   c: null,
   r: true
 }];
-
 exports.evalpyson = [{
-    p: {
-      __class__: 'Eval',
-      v: 'foo',
-      d: 'bar'
-    },
-    c: null,
-    r: 'bar'
-    }, {
-    p: {
-      __class__: 'Eval',
-      v: 'foo',
-      d: 'bar'
-    },
-    c: {foo: 'honey'},
-    r: 'honey'
-    }, {
-    p: {
-      __class__: 'Eval',
-      v: 'foo',
-      d: 0
-    },
-    c: {foo: 10},
-    r: 10
-    }, {
-    p: {
-      __class__: 'Eval',
-      v: 'foo',
-      d: 'bar'
-    },
-    c: {'honey': 'ham'},
-    r: 'bar'
-    }];
+  p: {
+    __class__: 'Eval',
+    v: 'foo',
+    d: 'bar'
+  },
+  c: null,
+  r: 'bar'
+}, {
+  p: {
+    __class__: 'Eval',
+    v: 'foo',
+    d: 'bar'
+  },
+  c: {
+    foo: 'honey'
+  },
+  r: 'honey'
+}, {
+  p: {
+    __class__: 'Eval',
+    v: 'foo',
+    d: 0
+  },
+  c: {
+    foo: 10
+  },
+  r: 10
+}, {
+  p: {
+    __class__: 'Eval',
+    v: 'foo',
+    d: 'bar'
+  },
+  c: {
+    'honey': 'ham'
+  },
+  r: 'bar'
+}];
 exports.getpyson = [{
   p: {
     __class__: 'Get',
@@ -275,7 +280,9 @@ exports.getpyson = [{
 }, {
   p: {
     __class__: 'Get',
-    v: {'foo': 10},
+    v: {
+      'foo': 10
+    },
     k: 'foo',
     d: 30
   },
@@ -284,7 +291,9 @@ exports.getpyson = [{
 }, {
   p: {
     __class__: 'Get',
-    v: {'foo': 10},
+    v: {
+      'foo': 10
+    },
     k: 'bar',
     d: 30
   },
@@ -392,7 +401,10 @@ exports.inpyson = [{
 }, {
   p: {
     __class__: 'In',
-    v: {a: 1, b: 2},
+    v: {
+      a: 1,
+      b: 2
+    },
     k: 'foo'
   },
   c: null,
@@ -400,7 +412,11 @@ exports.inpyson = [{
 }, {
   p: {
     __class__: 'In',
-    v: {a: 1, b: 2, foo: 10},
+    v: {
+      a: 1,
+      b: 2,
+      foo: 10
+    },
     k: 'foo'
   },
   c: null,
@@ -430,7 +446,11 @@ exports.lenpyson = [{
 }, {
   p: {
     __class__: 'Len',
-    v: {a: 1, b: 2, c: 3}
+    v: {
+      a: 1,
+      b: 2,
+      c: 3
+    }
   },
   c: null,
   r: 3
@@ -530,50 +550,49 @@ exports.orpyson = [{
   c: null,
   r: true
 }];
-
 var composite = {
-    __class__: 'If',
-    c: {
-      __class__: 'Equal',
-      s1: {
+  __class__: 'If',
+  c: {
+    __class__: 'Equal',
+    s1: {
+      __class__: 'Eval',
+      v: 'foo',
+      d: 0
+    },
+    s2: {
+      __class__: 'Len',
+      v: {
         __class__: 'Eval',
-        v: 'foo',
-        d: 0
-      },
-      s2: {
-        __class__: 'Len',
-        v: {
-          __class__: 'Eval',
-          v: 'bar',
-          d: [1, 2]
-        }
-      }
-    },
-    t: {
-      __class__: 'Date',
-      dy: 4
-    },
-    e: {
-      __class__: 'If',
-      c: {
-        __class__: 'Greater',
-        s1: 10,
-        s2: {
-          __class__: 'Eval',
-          v: 'ham',
-          d: 4
-        },
-        e: false
-      },
-      t: {
-        __class__: 'Date'
-      },
-      e: {
-        __class__: 'Date',
-        dy: 8
+        v: 'bar',
+        d: [1, 2]
       }
     }
-  };
+  },
+  t: {
+    __class__: 'Date',
+    dy: 4
+  },
+  e: {
+    __class__: 'If',
+    c: {
+      __class__: 'Greater',
+      s1: 10,
+      s2: {
+        __class__: 'Eval',
+        v: 'ham',
+        d: 4
+      },
+      e: false
+    },
+    t: {
+      __class__: 'Date'
+    },
+    e: {
+      __class__: 'Date',
+      dy: 8
+    }
+  }
+};
 exports.composite = [{
   p: composite,
   c: {
@@ -586,8 +605,8 @@ exports.composite = [{
       .month(),
     d: moment()
       .date()
-    })
-  }, {
+  })
+}, {
   p: composite,
   c: {
     foo: 2,
@@ -600,8 +619,8 @@ exports.composite = [{
       .month(),
     d: moment()
       .date()
-    })
-  }, {
+  })
+}, {
   p: composite,
   c: {
     foo: 2,
@@ -615,5 +634,5 @@ exports.composite = [{
       .month(),
     d: moment()
       .date()
-    })
+  })
 }];
