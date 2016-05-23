@@ -22,12 +22,9 @@ function make(ts) {
         crash.should.equal(true);
       }
     }
-    else if (t.r.isDate === true) {
-      resolve(t.p, t.c).format('YYYY:MM:DD').should.equal(
-        t.r.format('YYYY:MM:DD'));
-    }
     else {
-      resolve(t.p, t.c).should.eql(t.r);
+      resolve(t.p, t.c)
+        .should.eql(t.r);
     }
   });
 }
