@@ -1,10 +1,10 @@
 var _ = require('underscore');
-var pyson = require('..');
+var Pyson = require('..');
 require('should');
 var data = require('./.data');
 
 function resolve(p, c) {
-  return pyson(JSON.stringify(p))
+  return Pyson(JSON.stringify(p))
     .resolve(c);
 }
 
@@ -22,9 +22,12 @@ function make(ts) {
         crash.should.equal(true);
       }
     }
+    else if (t.r.isDate === true) {
+      resolve(t.p, t.c).format('YYYY:MM:DD').should.equal(
+        t.r.format('YYYY:MM:DD'));
+    }
     else {
-      resolve(t.p, t.c)
-        .should.equal(t.r);
+      resolve(t.p, t.c).should.eql(t.r);
     }
   });
 }
