@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var Pyson = require('..');
+var moment = require('moment');
 require('should');
 var data = require('./.data');
 
@@ -23,8 +24,15 @@ function make(ts) {
       }
     }
     else {
-      resolve(t.p, t.c)
-        .should.eql(t.r);
+      var r = resolve(t.p, t.c);
+      if (t.r instanceof moment) {
+        t.r.format()
+          .should.equal(moment(r)
+            .format());
+      }
+      else {
+        t.r.should.equal(r);
+      }
     }
   });
 }

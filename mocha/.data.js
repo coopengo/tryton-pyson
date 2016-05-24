@@ -1,7 +1,7 @@
+/* jshint -W069 */
 var _ = require('underscore');
 var moment = require('moment');
-// WARNING : Moment starts months at 0, and milliseconds are expected to be < 1
-exports.and = [{
+exports['and'] = [{
   p: {
     __class__: 'And',
     s: [true, true, false]
@@ -23,7 +23,7 @@ exports.and = [{
   c: null,
   r: Error
 }];
-exports.bool = [{
+exports['bool'] = [{
   p: {
     __class__: 'Bool',
     v: false
@@ -38,61 +38,45 @@ exports.bool = [{
   c: null,
   r: true
 }];
-exports.date = [{
+exports['date'] = [{
   p: {
     __class__: 'Date',
     y: 2016,
-    M: 2,
+    M: 3,
     d: 10
   },
   c: null,
-  r: _.date({
-    y: 2016,
-    M: 2,
-    d: 10
-  })
+  r: moment('2016-03-10')
+    .startOf('d')
 }, {
   p: {
     __class__: 'Date'
   },
   c: null,
-  r: _.date({
-    y: moment()
-      .year(),
-    M: moment()
-      .month(),
-    d: moment()
-      .date()
-  })
+  r: moment()
+    .startOf('d')
 }, {
   p: {
     __class__: 'Date',
     y: 2015
   },
   c: null,
-  r: _.date({
-    y: 2015,
-    M: moment()
-      .month(),
-    d: moment()
-      .date()
-  })
+  r: moment()
+    .year(2015)
+    .startOf('d')
 }, {
   p: {
     __class__: 'Date',
     dy: 4
   },
   c: null,
-  r: _.date({
-    y: moment()
-      .year() + 4,
-    M: moment()
-      .month(),
-    d: moment()
-      .date()
-  })
+  r: moment()
+    .startOf('d')
+    .add({
+      y: 4
+    })
 }];
-exports.datetime = [{
+exports['datetime'] = [{
   p: {
     __class__: 'Datetime',
     y: 2016,
@@ -101,62 +85,20 @@ exports.datetime = [{
     h: 11,
     m: 26,
     s: 15,
-    ms: 0.421
+    ms: 100000
   },
   c: null,
-  r: _.datetime({
-    y: 2016,
-    M: 3,
-    d: 10,
-    h: 11,
-    m: 26,
-    s: 15,
-    ms: 0.421
-  })
+  r: moment('2016-03-10 11:26:15.100')
 }, {
   p: {
     __class__: 'Datetime',
-    ms: 0.121
+    ms: 123456
   },
   c: null,
-  r: _.datetime({
-    y: moment()
-      .year(),
-    M: moment()
-      .month(),
-    d: moment()
-      .date(),
-    h: moment()
-      .hour(),
-    m: moment()
-      .minute(),
-    s: moment()
-      .second(),
-    ms: 0.121
-  })
-}, {
-  p: {
-    __class__: 'Datetime',
-    y: 2015,
-    h: 6,
-    ms: 0.420
-  },
-  c: null,
-  r: _.datetime({
-    y: 2015,
-    M: moment()
-      .month(),
-    d: moment()
-      .date(),
-    h: 6,
-    m: moment()
-      .minute(),
-    s: moment()
-      .second(),
-    ms: 0.420
-  })
+  r: moment()
+    .millisecond(123.456)
 }];
-exports.equalpyson = [{
+exports['equal'] = [{
   p: {
     __class__: 'Equal',
     s1: true,
@@ -229,7 +171,7 @@ exports.equalpyson = [{
   c: null,
   r: true
 }];
-exports.evalpyson = [{
+exports['eval'] = [{
   p: {
     __class__: 'Eval',
     v: 'foo',
@@ -268,7 +210,7 @@ exports.evalpyson = [{
   },
   r: 'bar'
 }];
-exports.getpyson = [{
+exports['get'] = [{
   p: {
     __class__: 'Get',
     v: {},
@@ -300,7 +242,7 @@ exports.getpyson = [{
   c: null,
   r: 30
 }];
-exports.greater = [{
+exports['greater'] = [{
   p: {
     __class__: 'Greater',
     s1: 10,
@@ -337,7 +279,7 @@ exports.greater = [{
   c: null,
   r: true
 }];
-exports.ifpyson = [{
+exports['if'] = [{
   p: {
     __class__: 'If',
     c: true,
@@ -374,7 +316,7 @@ exports.ifpyson = [{
   c: null,
   r: Error
 }];
-exports.inpyson = [{
+exports['in'] = [{
   p: {
     __class__: 'In',
     v: 10,
@@ -422,7 +364,7 @@ exports.inpyson = [{
   c: null,
   r: true
 }];
-exports.lenpyson = [{
+exports['len'] = [{
   p: {
     __class__: 'Len',
     v: 10
@@ -455,7 +397,7 @@ exports.lenpyson = [{
   c: null,
   r: 3
 }];
-exports.lesspyson = [{
+exports['less'] = [{
   p: {
     __class__: 'Less',
     s1: 10,
@@ -492,7 +434,7 @@ exports.lesspyson = [{
   c: null,
   r: true
 }];
-exports.notpyson = [{
+exports['not'] = [{
   p: {
     __class__: 'Not',
     v: 10
@@ -514,7 +456,7 @@ exports.notpyson = [{
   c: null,
   r: false
 }];
-exports.orpyson = [{
+exports['or'] = [{
   p: {
     __class__: 'Or',
     s: [1, 2, 3]
@@ -598,28 +540,19 @@ exports.composite = [{
   c: {
     foo: 2
   },
-  r: _.date({
-    y: moment()
-      .year() + 4,
-    M: moment()
-      .month(),
-    d: moment()
-      .date()
-  })
+  r: moment()
+    .startOf('d')
+    .add({
+      y: 4
+    })
 }, {
   p: composite,
   c: {
     foo: 2,
     bar: [1]
   },
-  r: _.date({
-    y: moment()
-      .year(),
-    M: moment()
-      .month(),
-    d: moment()
-      .date()
-  })
+  r: moment()
+    .startOf('d')
 }, {
   p: composite,
   c: {
@@ -627,12 +560,9 @@ exports.composite = [{
     bar: [1],
     ham: 12
   },
-  r: _.date({
-    y: moment()
-      .year() + 8,
-    M: moment()
-      .month(),
-    d: moment()
-      .date()
-  })
+  r: moment()
+    .startOf('d')
+    .add({
+      y: 8
+    })
 }];
