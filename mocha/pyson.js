@@ -36,7 +36,7 @@ function make(ts) {
     }
   });
 }
-describe('Pyson', function () {
+describe('Pyson', () => {
   _.each(data, (v, k) => {
     it('checks ' + k, () => make(v));
   });
