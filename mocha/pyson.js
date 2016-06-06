@@ -5,7 +5,7 @@ require('should');
 var data = require('./.data');
 
 function resolve(p, c) {
-  return Pyson(JSON.stringify(p))
+  return Pyson(p)
     .resolve(c);
 }
 
