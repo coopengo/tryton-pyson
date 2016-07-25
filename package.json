@@ -15,11 +15,11 @@
     "test": "mocha tests/*"
   },
   "dependencies": {
+    "moment": "^2.14.1",
     "tryton-base": "~4.0.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "moment": "^2.14.1",
     "should": "^10.0.0"
   }
 }
